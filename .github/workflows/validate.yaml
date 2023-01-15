@@ -1,0 +1,36 @@
+name: renovate-config-validator
+on:
+  workflow_call:
+    inputs:
+      validator_version:
+        description: "version of renovate-config-validator. By default, the latest version is used."
+        required: false
+        type: string
+      config_file_path:
+        description: |
+          Renovate Configuration file
+          By default, the following files are validated.
+
+          * .github/renovate.json
+          * .github/renovate.json5
+          * .gitlab/renovate.json
+          * .gitlab/renovate.json5
+          * .renovaterc.json
+          * renovate.json
+          * renovate.json5
+          * .renovaterc
+        required: false
+        type: string
+
+permissions: {}
+
+jobs:
+  renovate-config-validator:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+    - uses: suzuki-shunsuke/github-action-renovate-config-validator@7ab3d8f19305664925f3e626580f075f14e40386 # tag=v0.1.2
+      with:
+        validator_version: ${{ inputs.validator_version }}
+        config_file_path: ${{ inputs.config_file_path }}
