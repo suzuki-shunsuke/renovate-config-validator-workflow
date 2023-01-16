@@ -12,21 +12,22 @@ permissions: {}
 on:
   pull_request:
     branches:
-    - main
+      - main
     paths:
-    - .github/workflows/renovate-config-validator.yaml
-    - renovate.json5
+      - .github/workflows/renovate-config-validator.yaml
+      - renovate.json5
   push:
     branches:
-    - main
+      - main
     paths:
-    - .github/workflows/renovate-config-validator.yaml
-    - renovate.json5
+      - .github/workflows/renovate-config-validator.yaml
+      - renovate.json5
 
 jobs:
   renovate-config-validator:
     uses: suzuki-shunsuke/renovate-config-validator-workflow/.github/workflows/validate.yaml@37f3b320ff7dd6fbf4fa25ce9e704ed817437a4c # v0.1.0
-    permissions: {}
+    permissions:
+      contents: read
 ```
 
 ## LICENSE
