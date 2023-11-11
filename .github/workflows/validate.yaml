@@ -2,6 +2,10 @@ name: renovate-config-validator
 on:
   workflow_call:
     inputs:
+      ref:
+        description: "checkout ref"
+        required: false
+        type: string
       validator_version:
         description: "version of renovate-config-validator. By default, the latest version is used."
         required: false
@@ -34,8 +38,6 @@ on:
         required: false
         type: string
 
-permissions: {}
-
 jobs:
   renovate-config-validator:
     runs-on: ${{fromJSON(inputs.runs-on)}}
@@ -43,6 +45,8 @@ jobs:
       contents: read # For checkout private repository
     steps:
       - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        with:
+          ref: ${{inputs.ref}}
       - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3.8.2
         if: inputs.node-version != ''
         with:
