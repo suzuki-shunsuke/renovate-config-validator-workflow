@@ -51,7 +51,7 @@ jobs:
         if: inputs.node-version != ''
         with:
           node-version: ${{inputs.node-version}}
-      - uses: suzuki-shunsuke/github-action-renovate-config-validator@b7cd2b598bb51d071a2474e98f55cc25f91abec1 # v0.1.3
+      - uses: suzuki-shunsuke/github-action-renovate-config-validator@b54483862375f51910a60c4f498e927d4f3df466 # v1.0.1
         with:
           validator_version: ${{inputs.validator_version}}
           config_file_path: ${{inputs.config_file_path}}
