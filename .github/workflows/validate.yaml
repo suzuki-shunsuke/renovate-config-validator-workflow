@@ -37,6 +37,10 @@ on:
       node-version:
         required: false
         type: string
+      strict:
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   renovate-config-validator:
@@ -46,9 +50,19 @@ jobs:
       contents: read # For checkout private repository
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: inputs.config_file_path == ''
         with:
           ref: ${{inputs.ref}}
           persist-credentials: false
+          sparse-checkout: |
+            .github
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: inputs.config_file_path != ''
+        with:
+          ref: ${{inputs.ref}}
+          persist-credentials: false
+          sparse-checkout: ${{inputs.config_file_path}}
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         if: inputs.node-version != ''
         with:
@@ -57,3 +71,4 @@ jobs:
         with:
           validator_version: ${{inputs.validator_version}}
           config_file_path: ${{inputs.config_file_path}}
+          strict: ${{inputs.strict}}
