@@ -1,13 +1,9 @@
 ---
 name: test
-
 on: pull_request
-
 permissions: {}
-
 jobs:
   test:
     uses: ./.github/workflows/validate.yaml
     permissions:
       contents: read
-
