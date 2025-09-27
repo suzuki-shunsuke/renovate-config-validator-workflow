@@ -37,6 +37,7 @@ on:
       node-version:
         required: false
         type: string
+        default: 22.20.0
       strict:
         required: false
         type: boolean
