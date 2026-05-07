@@ -64,12 +64,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: ${{inputs.config_file_path}}
           sparse-checkout-cone-mode: false
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        if: inputs.node-version != ''
-        with:
-          node-version: ${{inputs.node-version}}
       - uses: suzuki-shunsuke/github-action-renovate-config-validator@ee9f69e1f683ed0d08225086482b34fc9abe9300 # v2.1.0
         with:
           validator_version: ${{inputs.validator_version}}
           config_file_path: ${{inputs.config_file_path}}
           strict: ${{inputs.strict}}
+          node-version: ${{inputs.node-version != '' && inputs.node-version || 'none'}}
